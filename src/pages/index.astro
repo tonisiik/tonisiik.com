@@ -1,17 +1,175 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <!-- Hero -->
+  <section class="mx-auto max-w-5xl px-6 pt-24 pb-20">
+    <p class="text-sm font-mono text-amber-400 mb-4 tracking-widest uppercase">Lead Manufacturing Data Scientist</p>
+    <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-white leading-tight max-w-3xl">
+      I build the intelligence that powers the modern foundry.
+    </h1>
+    <p class="mt-6 text-lg text-zinc-400 max-w-2xl leading-relaxed">
+      15+ years at the intersection of metallurgical engineering and data science.
+      I replace subjective legacy processes with predictive models, computer vision,
+      and factory-scale digital twins.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a
+        href="#work"
+        class="inline-flex items-center gap-2 bg-amber-400 text-zinc-950 font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-amber-300 transition-colors"
+      >
+        See my work
+      </a>
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 font-semibold text-sm px-5 py-2.5 rounded-md hover:border-zinc-500 hover:text-white transition-colors"
+      >
+        Get in touch
+      </a>
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- About -->
+  <section id="about" class="mx-auto max-w-5xl px-6 py-20">
+    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-10">About</h2>
+    <div class="grid md:grid-cols-2 gap-12">
+      <div>
+        <h3 class="text-2xl font-semibold text-white mb-4">Bridging Two Worlds</h3>
+        <p class="text-zinc-400 leading-relaxed mb-4">
+          I operate at the intersection of traditional heavy industry and cutting-edge data science.
+          With over 15 years of experience in metallurgical engineering and foundry management,
+          I have transitioned from managing physical operations to architecting the digital systems
+          that optimize them.
+        </p>
+        <p class="text-zinc-400 leading-relaxed">
+          My mission is to eliminate <span class="text-white font-medium">"Data Debt"</span> in
+          manufacturing — replacing subjective legacy processes with high-fidelity predictive models,
+          automated computer vision, and factory-scale simulations.
+        </p>
+      </div>
+      <div class="space-y-6">
+        {[
+          {
+            label: 'Predictive Analytics',
+            desc: 'Building ML models (NOSTRADAMUS) that forecast quality outcomes and prevent scrap before the first mold is poured.',
+          },
+          {
+            label: 'Computer Vision',
+            desc: 'Developing custom AI tools (MIRU) for automated microstructural analysis — reducing QA cycle times from hours to seconds.',
+          },
+          {
+            label: 'Digital Twins',
+            desc: 'Architecting high-fidelity factory simulations (FLUX) to optimize WIP, reduce lead times, and de-risk large-scale CAPEX investments.',
+          },
+        ].map(({ label, desc }) => (
+          <div class="border-l-2 border-amber-400 pl-4">
+            <p class="text-white font-semibold text-sm mb-1">{label}</p>
+            <p class="text-zinc-400 text-sm leading-relaxed">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- Work / Achievements -->
+  <section id="work" class="mx-auto max-w-5xl px-6 py-20">
+    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-10">Selected Work</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      {[
+        {
+          value: 'CHF 5M+',
+          label: 'Value Recovery',
+          desc: 'Resolved a critical metallurgical root-cause defect through SEM/EDX correlation and automated microstructural tracking.',
+        },
+        {
+          value: 'BIOME',
+          label: 'Production Intelligence Platform',
+          desc: 'Architected a unified ecosystem integrating SQL data pipelines with React-based analytical front-ends across the foundry.',
+        },
+        {
+          value: 'AI.SEE',
+          label: 'Visual Inspection',
+          desc: 'Leading site-wide deployment of AI-based visual inspection systems for gunmetal casting quality control.',
+        },
+      ].map(({ value, label, desc }) => (
+        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 hover:border-zinc-600 transition-colors">
+          <p class="text-2xl font-bold text-amber-400 mb-1">{value}</p>
+          <p class="text-white font-semibold text-sm mb-3">{label}</p>
+          <p class="text-zinc-400 text-sm leading-relaxed">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- Toolkit -->
+  <section class="mx-auto max-w-5xl px-6 py-20">
+    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-10">Toolkit</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+      {[
+        {
+          area: 'Foundry',
+          tools: ['Metallurgy', 'DoE', 'SPC', 'Lean Six Sigma (DMAIC)', 'APM/PLM'],
+        },
+        {
+          area: 'Data Science',
+          tools: ['Python', 'Pandas', 'Scikit-learn', 'TensorFlow', 'SimPy'],
+        },
+        {
+          area: 'Architecture',
+          tools: ['SQL', 'PowerBI', 'React', 'FastAPI', 'Astro'],
+        },
+        {
+          area: 'AI Orchestration',
+          tools: ['Gemini', 'Claude', 'GPT-4', 'Agent Workflows', 'MCP'],
+        },
+      ].map(({ area, tools }) => (
+        <div>
+          <p class="text-white font-semibold text-sm mb-3">{area}</p>
+          <ul class="space-y-1.5">
+            {tools.map((t) => (
+              <li class="text-zinc-400 text-sm flex items-center gap-2">
+                <span class="w-1 h-1 rounded-full bg-amber-400 shrink-0"></span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- Contact -->
+  <section id="contact" class="mx-auto max-w-5xl px-6 py-20">
+    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-6">Contact</h2>
+    <p class="text-zinc-400 max-w-xl leading-relaxed mb-8">
+      Always looking to connect with professionals at the forefront of
+      <span class="text-white">Industry 4.0</span> and
+      <span class="text-white">Smart Manufacturing</span>.
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <a
+        href="https://www.linkedin.com/in/tonisiik"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 text-sm font-medium px-5 py-2.5 rounded-md hover:border-zinc-500 hover:text-white transition-colors"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="/cv.pdf"
+        class="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 text-sm font-medium px-5 py-2.5 rounded-md hover:border-zinc-500 hover:text-white transition-colors"
+      >
+        Download CV (PDF)
+      </a>
+    </div>
+  </section>
+</Layout>

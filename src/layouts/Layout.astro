@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Toni Siik — Lead Manufacturing Data Scientist',
+  description = 'Building the intelligence that powers the modern foundry.',
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-zinc-950 text-zinc-100 antialiased">
+    <header class="fixed top-0 inset-x-0 z-50 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur">
+      <nav class="mx-auto max-w-5xl px-6 h-14 flex items-center justify-between">
+        <a href="/" class="text-sm font-semibold tracking-tight text-white hover:text-zinc-300 transition-colors">
+          Toni Siik
+        </a>
+        <div class="flex items-center gap-6 text-sm text-zinc-400">
+          <a href="#about" class="hover:text-white transition-colors">About</a>
+          <a href="#work" class="hover:text-white transition-colors">Work</a>
+          <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="pt-14">
+      <slot />
+    </main>
+
+    <footer class="border-t border-zinc-800 mt-24">
+      <div class="mx-auto max-w-5xl px-6 py-8 text-sm text-zinc-500 flex justify-between items-center">
+        <span>© {new Date().getFullYear()} Toni Siik</span>
+        <span>Built with Astro + Tailwind</span>
+      </div>
+    </footer>
+  </body>
+</html>
