@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const experience = [
+  {
+    company: 'Georg Fischer JRG AG',
+    location: 'Sissach, Switzerland',
+    period: '2022 — Present',
+    role: 'Production Engineer / Foundry Expert',
+    highlights: [
+      'Root-cause analysis of CHF 5M+ metallurgical defect via DoE, SEM, and EDX — transitioned QA from subjective visual testing to a measurable, data-driven process.',
+      'Conceptualized full replacement project for core foundry machinery and designed an AMR-based automated core-shop modernization.',
+      'Implemented 5S and Shopfloor Management principles; improved lead times for high-runner products by ~30% via Kanban.',
+      'Defined the DFM review process for new product introduction and corrected false cost models in SAP.',
+      'Responsible for plant-wide data management, analysis, and foundry safety planning.',
+    ],
+  },
+  {
+    company: 'Funke GmbH',
+    location: 'Alfeld, Germany',
+    period: '2019 — 2022',
+    role: 'Technical Director / Head of Foundry',
+    highlights: [
+      'Led quality management implementation to achieve AS9100 aerospace certification, opening a new high-value market segment.',
+      'Improved yield on all new products by ≥50% and reduced chill usage by 60% through redesigned casting concept process.',
+      'Reduced prototype production effort by 80% via 3D printed molds — lead times under 5 days for finished, machined prototypes.',
+      'Solved critical Magnesium casting defects by redefining grain refinement and heat treatment processes.',
+      'Provided direct design support to Rimac for next-generation electric engine components.',
+    ],
+  },
+  {
+    company: 'Nemak Wernigerode GmbH',
+    location: 'Wernigerode, Germany',
+    period: '2015 — 2019',
+    role: 'Senior Project Engineer',
+    highlights: [
+      'Rescued a critical engine block project near SOP — resolved hot tearing root cause with process parameter adjustments alone, avoiding costly tooling changes.',
+      'Built a SQL-based framework for leveraging process data across the entire manufacturing chain.',
+      'Analyzed 18 months of prototyping data (10,000+ tensile bars) to develop a Minitab predictive tool for material properties.',
+      'Led 3D printing integration for novel casting concepts in highly optimized engine water jackets.',
+    ],
+  },
+  {
+    company: 'Componenta',
+    location: 'Helsinki, Finland',
+    period: '2011 — 2015',
+    role: 'Product Development Engineer',
+    highlights: [
+      'Reduced foundry scrap rates by 50% in a 6-month project using simulation and process data analysis.',
+      'Identified root cause of unexplainable microstructure defect in new-generation ductile irons (GJS-600-10).',
+      'Developed modular 3D printed prototype system deployable on a standard manufacturing line.',
+      'Designed a casting simulation data framework that reduced required transfer volumes by several orders of magnitude.',
+    ],
+  },
+];
+
+const achievements = [
+  { value: 'CHF 5M+', label: 'Scrap Value Recovered', sub: 'Georg Fischer JRG' },
+  { value: '50%', label: 'Scrap Rate Reduction', sub: 'Componenta, 6 months' },
+  { value: '80%', label: 'Prototype Effort Reduction', sub: 'Funke GmbH' },
+  { value: '60%', label: 'Chill Usage Reduction', sub: 'Funke GmbH' },
+];
+
+const skills = [
+  {
+    area: 'Simulation',
+    items: ['MAGMAsoft', 'Flow3D Cast', 'SimPy (Python)'],
+  },
+  {
+    area: 'Data & Analytics',
+    items: ['Python (Pandas, NumPy, Scikit-learn)', 'SQL', 'Minitab', 'Advanced Excel', 'PowerBI'],
+  },
+  {
+    area: 'AI & Architecture',
+    items: ['TensorFlow', 'FastAPI', 'React', 'Astro', 'AI Agent Workflows'],
+  },
+  {
+    area: 'Project & Process',
+    items: ['Lean Six Sigma (DMAIC)', 'DoE', 'SPC', 'MS Project', 'Visio', 'Signavio'],
+  },
+  {
+    area: 'Languages',
+    items: ['Finnish (Native)', 'English (Fluent)', 'German (Fluent)', 'Swedish (Moderate)', 'Dutch (Moderate)'],
+  },
+];
+---
+
+<Layout title="CV — Toni Siik" description="Professional experience and skills of Toni Siik, Lead Manufacturing Data Scientist.">
+  <!-- Header -->
+  <section class="mx-auto max-w-5xl px-6 pt-16 pb-10">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+      <div>
+        <p class="text-sm font-mono text-amber-400 tracking-widest uppercase mb-2">Curriculum Vitae</p>
+        <h1 class="text-4xl font-bold text-white">Toni Siik</h1>
+        <p class="text-zinc-400 mt-1">Lead Manufacturing Data Scientist · Foundry Expert · AI Architect</p>
+      </div>
+      <a
+        href="/cv.pdf"
+        class="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 text-sm font-medium px-5 py-2.5 rounded-md hover:border-zinc-500 hover:text-white transition-colors shrink-0"
+      >
+        ↓ Download PDF
+      </a>
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- Key Numbers -->
+  <section class="mx-auto max-w-5xl px-6 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {achievements.map(({ value, label, sub }) => (
+        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-5">
+          <p class="text-3xl font-bold text-amber-400">{value}</p>
+          <p class="text-white text-sm font-semibold mt-1">{label}</p>
+          <p class="text-zinc-500 text-xs mt-0.5">{sub}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- Experience Timeline -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-12">Experience</h2>
+    <div class="relative">
+      <!-- vertical line -->
+      <div class="absolute left-0 top-2 bottom-2 w-px bg-zinc-800 hidden md:block"></div>
+
+      <div class="space-y-12">
+        {experience.map(({ company, location, period, role, highlights }) => (
+          <div class="md:pl-10 relative">
+            <!-- dot -->
+            <div class="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-amber-400 hidden md:block"></div>
+
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-4">
+              <div>
+                <h3 class="text-white font-semibold text-lg">{company}</h3>
+                <p class="text-zinc-400 text-sm">{role} · {location}</p>
+              </div>
+              <span class="text-zinc-500 text-sm font-mono shrink-0">{period}</span>
+            </div>
+
+            <ul class="space-y-2">
+              {highlights.map((h) => (
+                <li class="flex gap-3 text-sm text-zinc-400 leading-relaxed">
+                  <span class="text-amber-400 mt-1 shrink-0">▸</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- Education -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-8">Education</h2>
+    <div class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+        <div>
+          <p class="text-white font-semibold">MSc & BSc — Metal Materials and Manufacturing</p>
+          <p class="text-zinc-400 text-sm">Tampere University of Technology, Finland</p>
+        </div>
+        <span class="text-zinc-500 text-sm font-mono">2005 — 2011</span>
+      </div>
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+        <div>
+          <p class="text-white font-semibold">Lean Six Sigma Green Belt</p>
+          <p class="text-zinc-400 text-sm">In Progress</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="border-t border-zinc-800"></div>
+
+  <!-- Skills -->
+  <section class="mx-auto max-w-5xl px-6 py-16">
+    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-8">Skills</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {skills.map(({ area, items }) => (
+        <div>
+          <p class="text-white font-semibold text-sm mb-3">{area}</p>
+          <ul class="space-y-1.5">
+            {items.map((item) => (
+              <li class="flex items-center gap-2 text-zinc-400 text-sm">
+                <span class="w-1 h-1 rounded-full bg-amber-400 shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
