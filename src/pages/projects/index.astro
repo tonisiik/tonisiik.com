@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const projects = await getCollection('projects');
+// Ensure it's sorted or just display as is
+const sortedProjects = projects.sort((a, b) => {
+    return new Date(b.data.pubdate || Date.now()).valueOf() - new Date(a.data.pubdate || Date.now()).valueOf();
+});
+---
+
+<Layout title="Case Studies | tonisiik.com">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="md:flex md:items-center md:justify-between mb-8 pb-4 border-b border-gray-200 dark:border-gray-800">
+      <div class="min-w-0 flex-1">
+        <h2 class="text-3xl font-bold leading-7 text-gray-900 dark:text-white sm:truncate sm:tracking-tight">
+          Case Studies & Projects
+        </h2>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+          A selection of highlighted methodologies and engineering deployments.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {sortedProjects.map(project => (
+        <a href={`/projects/${project.id}`} class="block group h-full">
+          <div class="relative flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm transition-all hover:shadow-md hover:border-gray-300 dark:hover:border-gray-700 h-full">
+            {project.data.heroimage ? (
+                <div class="aspect-[16/9] w-full overflow-hidden bg-gray-200 dark:bg-gray-800">
+                  <img src={project.data.heroimage} alt={project.data.title} class="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500" />
+                </div>
+            ) : (
+                <div class="aspect-[16/9] w-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                    <span class="text-gray-400 dark:text-gray-600 text-2xl font-bold">{project.data.title.substring(0,2).toUpperCase()}</span>
+                </div>
+            )}
+            <div class="flex flex-col p-6 flex-grow">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs mb-4">
+                {project.data.pubdate && (
+                  <time datetime={project.data.pubdate} class="text-gray-500 dark:text-gray-400 font-mono tracking-tight">
+                    {new Date(project.data.pubdate).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </time>
+                )}
+                {project.data.category && (
+                  <span class="relative z-10 rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-0.5 font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                    {project.data.category}
+                  </span>
+                )}
+              </div>
+              <div class="group relative flex-grow">
+                <h3 class="mt-2 text-lg font-semibold leading-tight text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 decoration-blue-500/30 underline-offset-4 group-hover:underline transition-colors">
+                  {project.data.title}
+                </h3>
+                <p class="mt-4 line-clamp-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                  {project.data.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>

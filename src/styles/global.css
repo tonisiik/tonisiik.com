@@ -1,12 +1,12 @@
 @import "tailwindcss";
-
+@plugin "@tailwindcss/typography";
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   ::selection {
-    background-color: theme(colors.amber.400);
-    color: theme(colors.zinc.950);
+    background-color: var(--color-amber-400);
+    color: var(--color-zinc-950);
   }
 }
