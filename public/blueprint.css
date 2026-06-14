@@ -5,13 +5,13 @@
    [data-mode="ink"]       black ink on drafting paper
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=IBM+Plex+Mono:wght@400;500;600&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* standardized ISO-3098-style technical lettering: one family, sized by class */
-  --f-display: 'Rajdhani', sans-serif;  /* large lettering / titles / numerals */
-  --f-hand: 'Rajdhani', sans-serif;     /* labels & annotations */
-  --f-spec: 'Rajdhani', sans-serif;     /* notes / body */
+  --f-display: 'Architects Daughter', 'Rajdhani', sans-serif;  /* hand-lettered titles / numerals */
+  --f-hand: 'Architects Daughter', 'Rajdhani', sans-serif;     /* hand-lettered labels & annotations */
+  --f-spec: 'Rajdhani', sans-serif;     /* notes / body — kept crisp for readability */
   --f-typed: 'IBM Plex Mono', monospace;/* typed title-block & stamp only */
   --maxw: 1280px;
   --pad: clamp(18px, 4.5vw, 64px);
