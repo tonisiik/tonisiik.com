@@ -496,3 +496,7 @@ section { position: relative; z-index: 2; }
   /* slimmer portrait column + vertical centering so the headshot row isn't taller than its text */
   .about .wrap { grid-template-columns: 0.66fr 1.34fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
 }
+
+/* ---------- widen the About intro (was squeezed by plate-head 22ch) ---------- */
+.about .plate-head { max-width: none; }
+.about-lede { max-width: 44ch; }
