@@ -500,3 +500,6 @@ section { position: relative; z-index: 2; }
 /* ---------- widen the About intro (was squeezed by plate-head 22ch) ---------- */
 .about .plate-head { max-width: none; }
 .about-lede { max-width: 44ch; }
+
+/* About intro = full column width (match the stat boxes underneath) */
+.about-lede { max-width: none; }
