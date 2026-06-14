@@ -404,3 +404,61 @@ section { position: relative; z-index: 2; }
 /* ---------- line-art project marks (added) ---------- */
 .proj .proj-mark{ display:block; width:30px; height:30px; margin-bottom:12px; color:inherit; }
 .proj .proj-mark svg{ width:100%; height:100%; display:block; overflow:visible; }
+
+/* ============================================================
+   SUB-PAGES (CV + project detail) — added
+   ============================================================ */
+.sheet-page { padding: 122px 0 50px; }
+.sheet-page .wrap { max-width: 1000px; }
+
+/* rendered markdown (case studies) */
+.doc { font-family: var(--f-spec); color: var(--ink-soft); font-size: 16px; }
+.doc > *:first-child { margin-top: 0; }
+.doc h1 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: clamp(28px,4.5vw,46px); line-height: 1.02; color: var(--ink); margin: 0 0 6px; }
+.doc h2 { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: clamp(20px,2.6vw,28px); color: var(--ink); margin: 36px 0 12px; padding-bottom: 8px; position: relative; }
+.doc h2::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.4px; background: var(--ink-faint); filter: url(#pencil); }
+.doc h3 { font-family: var(--f-hand); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; font-size: 18px; color: var(--accent); margin: 24px 0 8px; }
+.doc h4 { font-family: var(--f-hand); font-weight: 600; color: var(--ink); margin: 18px 0 6px; }
+.doc p { margin: 10px 0; line-height: 1.6; }
+.doc strong { color: var(--ink); font-weight: 600; }
+.doc em { color: var(--ink); }
+.doc a { color: var(--accent); border-bottom: 1.4px dashed var(--ink-faint); }
+.doc a:hover { border-bottom-style: solid; }
+.doc ul, .doc ol { margin: 10px 0; padding-left: 26px; }
+.doc li { margin: 6px 0; line-height: 1.55; }
+.doc ul li { list-style: none; position: relative; }
+.doc ul li::before { content: "×"; position: absolute; left: -20px; color: var(--ink-faint); font-family: var(--f-hand); }
+.doc blockquote { margin: 16px 0; padding: 8px 0 8px 18px; border-left: 2px solid var(--accent); color: var(--ink-soft); font-family: var(--f-hand); }
+.doc code { font-family: var(--f-typed); font-size: .88em; background: var(--panel); padding: 2px 6px; border-radius: 3px; color: var(--ink); }
+.doc pre { font-family: var(--f-typed); font-size: 12.5px; line-height: 1.45; background: var(--paper-deep); color: var(--ink-soft); padding: 16px 18px; border-radius: 4px; overflow: auto; margin: 16px 0; border: 1.4px solid var(--grid-major); }
+.doc pre code { background: none; padding: 0; color: inherit; }
+.doc table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+.doc th, .doc td { border: 1.2px solid var(--grid-major); padding: 8px 10px; text-align: left; }
+.doc th { font-family: var(--f-hand); text-transform: uppercase; letter-spacing: .04em; color: var(--ink); font-weight: 600; }
+.doc hr { border: 0; border-top: 1.4px solid var(--ink-faint); margin: 26px 0; filter: url(#pencil); }
+
+.doc-head .sheet-tag { margin-bottom: 8px; }
+.doc-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 26px; }
+.doc-tags .mini { position: relative; font-family: var(--f-hand); font-size: 13px; color: var(--ink-soft); padding: 5px 12px; }
+.doc-tags .mini .edge { border-width: 1.2px; }
+.backlink { display: inline-flex; gap: 8px; font-family: var(--f-hand); font-size: 16px; color: var(--ink-soft); margin-top: 36px; }
+.backlink:hover { color: var(--accent); }
+
+/* CV sheet */
+.cv-head { position: relative; padding: 26px 28px; margin-bottom: 8px; }
+.cv-name { font-family: var(--f-display); font-weight: 700; text-transform: uppercase; font-size: clamp(34px,6vw,60px); line-height: .9; }
+.cv-role { font-family: var(--f-hand); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); margin-top: 8px; font-size: 16px; }
+.cv-contact { font-family: var(--f-typed); font-size: 12.5px; color: var(--ink-faint); margin-top: 16px; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.cv-contact a { color: var(--ink-soft); }
+.cv-contact a:hover { color: var(--accent); }
+.cv-section { margin-top: 38px; }
+.cv-list { margin: 10px 0 0; padding-left: 22px; }
+.cv-list li { list-style: none; position: relative; font-size: 13.5px; color: var(--ink-soft); margin: 7px 0; line-height: 1.5; }
+.cv-list li::before { content: "—"; position: absolute; left: -22px; color: var(--ink-faint); }
+.cv-list strong { color: var(--ink); font-weight: 600; }
+.cv-twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+@media (max-width: 720px) { .cv-twocol { grid-template-columns: 1fr; } }
+
+/* ---------- clickable cards (stretched link) ---------- */
+.card-link { position: absolute; inset: 0; z-index: 5; border-radius: 3px; }
+.proj, .feat { cursor: pointer; }

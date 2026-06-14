@@ -46,8 +46,8 @@ V3CTOR is an **MCP (Model Context Protocol) server**: an AI agent — or a perso
 
 ## Status
 
-Initial build complete and running. The integrity core and the full offline analysis workflow are done: roughly 3,700 lines of Python with a complete test suite — **85 tests green**. The server is **registered and connected as a live MCP toolset of 22 tools** (project, source, module, and governance categories), with an offline schema mirror of the source data warehouse seeded for development and a v1 brand identity carried through the atlas and reports. The specification was frozen only after two independent adversarial reviews and 30+ findings were incorporated.
+Built and proven on real data. The full lifecycle — capture → model → analyse → validate → release → report → reproduce — is implemented with enforcement at every gate: roughly 3,700 lines of Python running as a live MCP toolset of **22 tools**, backed by a full automated test suite. The specification was frozen only after two independent adversarial reviews and 30+ findings were incorporated.
 
-The next step is the part that proves it: wiring up the live data-warehouse connector and running the first real pilot — a correlation study — end-to-end through the engine, reproducible to identical hashes.
+It has now been **proven end-to-end on a real foundry quality root-cause study** — tiered sources → modelled → validated → released → reported → independently reviewed → reproduced to identical hashes. Next: a live data-warehouse connector, out-of-sample confirmation of the headline findings, and broader rollout.
 
 > V3CTOR is the system layer: it turns one-off expert analysis into a reusable, auditable capability that an engineer — or an AI agent — can run without re-deriving the discipline each time.
