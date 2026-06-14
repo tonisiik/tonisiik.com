@@ -463,3 +463,26 @@ section { position: relative; z-index: 2; }
 /* ---------- clickable cards (stretched link) ---------- */
 .card-link { position: absolute; inset: 0; z-index: 5; border-radius: 3px; }
 .proj, .feat { cursor: pointer; }
+
+/* ============================================================
+   TEST — small-caps hand-lettering + name in ISO (Rajdhani)
+   ============================================================ */
+/* the name reverts to the clean ISO font (Rajdhani) */
+.hero-name, .cv-name { font-family: 'Rajdhani', sans-serif; }
+
+/* hand-lettered headings & labels rendered as small caps */
+.sheet-tag,
+.hero-sub,
+.plate-title,
+.contact h2,
+.tl .role,
+.proj h4,
+.feat h3,
+.disc h4,
+.bom-col h3,
+.cv-role,
+.fig-cap,
+.doc h1, .doc h2, .doc h3 {
+  font-variant: small-caps;
+  text-transform: none;
+}
