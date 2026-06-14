@@ -486,3 +486,13 @@ section { position: relative; z-index: 2; }
   font-variant: small-caps;
   text-transform: none;
 }
+
+/* ---------- tighter section spacing (added) ---------- */
+.plate { padding: clamp(46px, 6vw, 82px) 0; }
+.contact { padding: clamp(46px, 6vw, 82px) 0 40px; }
+.plate-head { margin-bottom: clamp(22px, 3vw, 38px); }
+.hero { padding: 104px 0 48px; }
+@media (min-width: 841px) {
+  /* slimmer portrait column + vertical centering so the headshot row isn't taller than its text */
+  .about .wrap { grid-template-columns: 0.66fr 1.34fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+}
