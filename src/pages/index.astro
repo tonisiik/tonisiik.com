@@ -1,175 +1,369 @@
 ---
-import Layout from '../layouts/Layout.astro';
+// Standalone hand-drawn "Drawing Set" portfolio (Claude Design — Blueprint variant).
+// Self-contained: loads /blueprint.css and /blueprint.js from public/. Blueprint/Ink toggle.
+// Professional content (Survey Stations / Path) completed from POLARIS Master Resume.
 ---
+<!DOCTYPE html>
+<html lang="en" data-mode="blueprint">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script is:inline>document.documentElement.className += ' js';</script>
+<title>Toni Siik — Drawing Set</title>
+<meta name="description" content="Toni Siik — manufacturing data scientist turning foundry data into measured shop-floor change. A hand-drawn technical-drawing portfolio.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/blueprint.css">
+</head>
+<body>
 
-<Layout>
-  <!-- Hero -->
-  <section class="mx-auto max-w-5xl px-6 pt-24 pb-20">
-    <p class="text-sm font-mono text-amber-400 mb-4 tracking-widest uppercase">Lead Manufacturing Data Scientist</p>
-    <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-white leading-tight max-w-3xl">
-      I build the intelligence that powers the modern foundry.
-    </h1>
-    <p class="mt-6 text-lg text-zinc-400 max-w-2xl leading-relaxed">
-      15+ years at the intersection of metallurgical engineering and data science.
-      I replace subjective legacy processes with predictive models, computer vision,
-      and factory-scale digital twins.
-    </p>
-    <div class="mt-10 flex flex-wrap gap-4">
-      <a
-        href="#work"
-        class="inline-flex items-center gap-2 bg-amber-400 text-zinc-950 font-semibold text-sm px-5 py-2.5 rounded-md hover:bg-amber-300 transition-colors"
-      >
-        See my work
-      </a>
-      <a
-        href="#contact"
-        class="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 font-semibold text-sm px-5 py-2.5 rounded-md hover:border-zinc-500 hover:text-white transition-colors"
-      >
-        Get in touch
-      </a>
-    </div>
-  </section>
+<!-- pencil filter: minute line drift + pencil-pressure opacity variance -->
+<svg class="svg-defs" aria-hidden="true">
+  <filter id="pencil" x="-8%" y="-8%" width="116%" height="116%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="2" seed="7" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="disp"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.055 0.07" numOctaves="2" seed="11" result="grain"/>
+    <feColorMatrix in="grain" type="matrix"
+      values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.42 0.6" result="mask"/>
+    <feComposite in="disp" in2="mask" operator="in"/>
+  </filter>
+  <filter id="pencil-fine" x="-8%" y="-8%" width="116%" height="116%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="3" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="disp"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.07 0.09" numOctaves="2" seed="5" result="grain"/>
+    <feColorMatrix in="grain" type="matrix"
+      values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0.55" result="mask"/>
+    <feComposite in="disp" in2="mask" operator="in"/>
+  </filter>
+</svg>
 
-  <div class="border-t border-zinc-800"></div>
+<!-- ===================== TOP BAR ===================== -->
+<header class="topbar" id="topbar">
+  <a class="id" href="#top">T. SIIK</a>
+  <nav class="idx">
+    <a href="#about">02·About</a>
+    <a href="#work">04·Work</a>
+    <a href="#path">05·Path</a>
+    <a href="#running">06·Running</a>
+    <a href="#contact">07·Contact</a>
+  </nav>
+  <div class="toggle" id="modeToggle" data-on="blueprint" role="button" tabindex="0" aria-label="Toggle drawing mode">
+    <span class="knob"></span>
+    <span class="opt on" data-mode="blueprint">Blueprint</span>
+    <span class="opt" data-mode="ink">Ink</span>
+  </div>
+</header>
 
-  <!-- About -->
-  <section id="about" class="mx-auto max-w-5xl px-6 py-20">
-    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-10">About</h2>
-    <div class="grid md:grid-cols-2 gap-12">
-      <div>
-        <h3 class="text-2xl font-semibold text-white mb-4">Bridging Two Worlds</h3>
-        <p class="text-zinc-400 leading-relaxed mb-4">
-          I operate at the intersection of traditional heavy industry and cutting-edge data science.
-          With over 15 years of experience in metallurgical engineering and foundry management,
-          I have transitioned from managing physical operations to architecting the digital systems
-          that optimize them.
-        </p>
-        <p class="text-zinc-400 leading-relaxed">
-          My mission is to eliminate <span class="text-white font-medium">"Data Debt"</span> in
-          manufacturing — replacing subjective legacy processes with high-fidelity predictive models,
-          automated computer vision, and factory-scale simulations.
-        </p>
+<!-- ===================== HERO / SHEET 01 ===================== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="sheet-tag rev"><b>SHEET 01</b> — General Arrangement</div>
+      <h1 class="hero-name">
+        <span class="rev d1">TONI</span>
+        <span class="l2 rev d2">SIIK</span>
+      </h1>
+      <div class="hero-sub rev d2">Manufacturing Data Scientist · Quality &amp; Process Intelligence</div>
+
+      <div class="hero-dim rev d3">
+        <div class="dim"><span class="ar">◄</span><span class="val">FROM ROOT CAUSE → TO PRODUCTION FIX</span><span class="ar">►</span></div>
       </div>
-      <div class="space-y-6">
-        {[
-          {
-            label: 'Predictive Analytics',
-            desc: 'Building ML models (NOSTRADAMUS) that forecast quality outcomes and prevent scrap before the first mold is poured.',
-          },
-          {
-            label: 'Computer Vision',
-            desc: 'Developing custom AI tools (MIRU) for automated microstructural analysis — reducing QA cycle times from hours to seconds.',
-          },
-          {
-            label: 'Digital Twins',
-            desc: 'Architecting high-fidelity factory simulations (FLUX) to optimize WIP, reduce lead times, and de-risk large-scale CAPEX investments.',
-          },
-        ].map(({ label, desc }) => (
-          <div class="border-l-2 border-amber-400 pl-4">
-            <p class="text-white font-semibold text-sm mb-1">{label}</p>
-            <p class="text-zinc-400 text-sm leading-relaxed">{desc}</p>
-          </div>
-        ))}
+
+      <p class="hero-lede rev d3">I own the manufacturing decision loop — <strong>detect, measure, explain, intervene, standardize</strong> — turning fragmented plant, lab, supplier and ERP data into causal root causes and measured shop-floor change.</p>
+
+      <div class="formula rev d4">
+        <span class="term">Foundry metallurgy<span class="edge"></span></span>
+        <span class="op">+</span>
+        <span class="term">ERP / SAP<span class="edge"></span></span>
+        <span class="op">+</span>
+        <span class="term">Data science<span class="edge"></span></span>
+        <span class="op">=</span>
+        <span class="res">Root cause</span>
+      </div>
+
+      <div class="hero-actions rev d4">
+        <a href="#work" class="btn solid">View the drawing set <span class="arr">→</span></a>
+        <a href="#contact" class="btn">Get in touch<span class="edge"></span></a>
       </div>
     </div>
-  </section>
 
-  <div class="border-t border-zinc-800"></div>
+    <div class="fig rev d2">
+      <svg id="loop-svg" viewBox="0 0 400 400" aria-label="Figure 1 — the decision loop"></svg>
+      <div class="fig-cap"><b>FIG. 1</b> — The Decision Loop</div>
+    </div>
+  </div>
+</section>
 
-  <!-- Work / Achievements -->
-  <section id="work" class="mx-auto max-w-5xl px-6 py-20">
-    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-10">Selected Work</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      {[
-        {
-          value: 'CHF 5M+',
-          label: 'Value Recovery',
-          desc: 'Resolved a critical metallurgical root-cause defect through SEM/EDX correlation and automated microstructural tracking.',
-        },
-        {
-          value: 'BIOME',
-          label: 'Production Intelligence Platform',
-          desc: 'Architected a unified ecosystem integrating SQL data pipelines with React-based analytical front-ends across the foundry.',
-        },
-        {
-          value: 'AI.SEE',
-          label: 'Visual Inspection',
-          desc: 'Leading site-wide deployment of AI-based visual inspection systems for gunmetal casting quality control.',
-        },
-      ].map(({ value, label, desc }) => (
-        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 hover:border-zinc-600 transition-colors">
-          <p class="text-2xl font-bold text-amber-400 mb-1">{value}</p>
-          <p class="text-white font-semibold text-sm mb-3">{label}</p>
-          <p class="text-zinc-400 text-sm leading-relaxed">{desc}</p>
+<!-- ===================== ABOUT / SHEET 02 ===================== -->
+<section class="plate about" id="about">
+  <div class="wrap">
+    <div class="portrait-plate rev">
+      <div class="portrait-frame">
+        <span class="edge"></span>
+        <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+        <span class="portrait-tag top">ELEV. — SUBJECT</span>
+        <div class="portrait-img"><img src="/assets/portrait.jpg" alt="Portrait of Toni Siik, rendered as a technical drawing"></div>
+        <div class="portrait-meta">
+          <div class="row"><span>SUBJECT</span><span class="v">Toni Siik</span></div>
+          <div class="row"><span>ROLE</span><span class="v">Lead Mfg. Data Scientist</span></div>
+          <div class="row"><span>DISCIPLINE</span><span class="v">Quality &amp; Process Intel.</span></div>
+          <div class="row"><span>LOCATION</span><span class="v">Switzerland</span></div>
         </div>
-      ))}
+      </div>
     </div>
-  </section>
 
-  <div class="border-t border-zinc-800"></div>
+    <div>
+      <div class="plate-head rev">
+        <div class="sheet-tag"><b>SHEET 02</b> — About</div>
+        <p class="about-lede" style="margin-top:16px">I turn fragmented plant, lab, supplier &amp; ERP data into <span class="u">causal root causes</span>, production policies, and measurement gates operators actually use.</p>
+      </div>
+      <div class="about-body note rev d1">
+        <p>Not just models — <strong>measured change</strong> in scrap, cost and process behaviour, in production. Detect a problem, measure it objectively, explain why it happens, intervene at the right lever, and standardize the fix so it sticks.</p>
+        <p>My edge is the rare overlap most heavy-industry data work is missing: <strong>foundry metallurgy</strong>, <strong>ERP / SAP master data</strong>, and <strong>data science</strong> in one head — the moat that turns a model into a trusted shop-floor decision. 14+ years across automotive, marine and aerospace casting.</p>
+      </div>
 
-  <!-- Toolkit -->
-  <section class="mx-auto max-w-5xl px-6 py-20">
-    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-10">Toolkit</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-      {[
-        {
-          area: 'Foundry',
-          tools: ['Metallurgy', 'DoE', 'SPC', 'Lean Six Sigma (DMAIC)', 'APM/PLM'],
-        },
-        {
-          area: 'Data Science',
-          tools: ['Python', 'Pandas', 'Scikit-learn', 'TensorFlow', 'SimPy'],
-        },
-        {
-          area: 'Architecture',
-          tools: ['SQL', 'PowerBI', 'React', 'FastAPI', 'Astro'],
-        },
-        {
-          area: 'AI Orchestration',
-          tools: ['Gemini', 'Claude', 'GPT-4', 'Agent Workflows', 'MCP'],
-        },
-      ].map(({ area, tools }) => (
-        <div>
-          <p class="text-white font-semibold text-sm mb-3">{area}</p>
-          <ul class="space-y-1.5">
-            {tools.map((t) => (
-              <li class="text-zinc-400 text-sm flex items-center gap-2">
-                <span class="w-1 h-1 rounded-full bg-amber-400 shrink-0"></span>
-                {t}
-              </li>
-            ))}
+      <div class="about-stats rev d2">
+        <div class="statbox"><span class="edge"></span><div class="n" data-count="2000" data-suffix="+">0</div><div class="l">Charges modelled</div></div>
+        <div class="statbox"><span class="edge"></span><div class="n" data-count="5">0</div><div class="l">Data systems integrated</div></div>
+        <div class="statbox"><span class="edge"></span><div class="n"><span>14</span><span class="u"> yr</span></div><div class="l">Metallurgy + data</div></div>
+      </div>
+
+      <div class="recog rev d3"><span class="edge"></span><span class="star">✶</span> Featured interview — Valimoviesti 1/2026 (Finnish foundry-industry trade magazine)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERTISE / SHEET 03 ===================== -->
+<section class="plate" id="expertise">
+  <div class="wrap">
+    <div class="plate-head rev">
+      <div class="sheet-tag"><b>SHEET 03</b> — Bill of Capabilities</div>
+      <h2 class="plate-title">Furnace <span class="u">→</span> Decision</h2>
+    </div>
+    <div class="bom rev d1">
+      <div class="bom-grid">
+        <div class="bom-col"><span class="edge"></span>
+          <h3><span class="it">A/</span> Data Science</h3>
+          <ul>
+            <li>Causal inference</li><li>Design of Experiments</li><li>Statistical Process Control</li>
+            <li>SHAP &amp; interpretability</li><li>Classical ML — XGBoost, RF</li><li>Computer vision &amp; deep learning</li>
           </ul>
         </div>
-      ))}
+        <div class="bom-col"><span class="edge"></span>
+          <h3><span class="it">B/</span> Engineering</h3>
+          <ul>
+            <li>Python · SQL</li><li>Pipelines — Parquet, DuckDB, Polars</li><li>FastAPI services</li>
+            <li>Electron / React apps</li><li>MCP servers</li><li>PyTorch · Cellpose-SAM</li>
+          </ul>
+        </div>
+        <div class="bom-col"><span class="edge"></span>
+          <h3><span class="it">C/</span> Domain</h3>
+          <ul>
+            <li>Foundry &amp; metallurgy</li><li>Quality engineering</li><li>ERP / SAP master data</li>
+            <li>Process metallurgy data</li><li>Defect &amp; scrap analysis</li><li>Acceptance / measurement gates</li>
+          </ul>
+        </div>
+        <div class="bom-col"><span class="edge"></span>
+          <h3><span class="it">D/</span> Method</h3>
+          <ul>
+            <li>Reproducibility-first</li><li>Adversarial review</li><li>Change management</li>
+            <li>Pre-registered analysis</li><li>Auditable lineage</li><li>Evidence over hype</li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="border-t border-zinc-800"></div>
-
-  <!-- Contact -->
-  <section id="contact" class="mx-auto max-w-5xl px-6 py-20">
-    <h2 class="text-xs font-mono text-zinc-500 tracking-widest uppercase mb-6">Contact</h2>
-    <p class="text-zinc-400 max-w-xl leading-relaxed mb-8">
-      Always looking to connect with professionals at the forefront of
-      <span class="text-white">Industry 4.0</span> and
-      <span class="text-white">Smart Manufacturing</span>.
-    </p>
-    <div class="flex flex-wrap gap-4">
-      <a
-        href="https://www.linkedin.com/in/tonisiik"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 text-sm font-medium px-5 py-2.5 rounded-md hover:border-zinc-500 hover:text-white transition-colors"
-      >
-        LinkedIn
-      </a>
-      <a
-        href="/cv.pdf"
-        class="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 text-sm font-medium px-5 py-2.5 rounded-md hover:border-zinc-500 hover:text-white transition-colors"
-      >
-        Download CV (PDF)
-      </a>
+<!-- ===================== WORK / SHEET 04 ===================== -->
+<section class="plate" id="work">
+  <div class="wrap">
+    <div class="plate-head rev">
+      <div class="sheet-tag"><b>SHEET 04</b> — Details &amp; Sections</div>
+      <h2 class="plate-title">Case studies, <span class="u">not slideware</span></h2>
     </div>
-  </section>
-</Layout>
+
+    <article class="feat rev">
+      <span class="edge"></span>
+      <div class="feat-inner">
+        <div class="feat-l">
+          <div class="detail-tag"><span class="callout-id"><span class="edge"></span>A</span><span class="lab">Flagship program</span></div>
+          <h3>Closed-Loop Quality Intelligence</h3>
+          <div class="code">MULTI-YEAR ROOT-CAUSE PROGRAM</div>
+          <p class="feat-desc note">Integrated five data systems across ~2,000 production charges. Causal inference + Design of Experiments isolated a supplier-chemistry × furnace-state interaction — driving a <strong>zero-CAPEX process-policy change</strong> plus a production fix, and replacing subjective inspection with quantitative acceptance criteria.</p>
+          <div class="feat-tags">
+            <span class="mini"><span class="edge"></span>Causal inference</span>
+            <span class="mini"><span class="edge"></span>DoE</span>
+            <span class="mini"><span class="edge"></span>SPC</span>
+            <span class="mini"><span class="edge"></span>Data integration</span>
+            <span class="mini"><span class="edge"></span>Change mgmt</span>
+          </div>
+        </div>
+        <div class="feat-r">
+          <div class="metric"><div class="n" data-count="5">0</div><div class="l">Data systems integrated</div></div>
+          <div class="metric"><div class="n" data-count="2000" data-suffix="+">0</div><div class="l">Production charges</div></div>
+          <div class="metric"><div class="n">ZERO<span class="u"> capex</span></div><div class="l">Process-policy fix</div></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="proj-grid">
+      <article class="proj rev d1"><span class="edge"></span>
+        <span class="proj-mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="36" height="36" rx="6"/><path d="M6 20 20 14 30 6M20 14 24 28 12 34M24 28 40 24M24 28 30 42M42 30 31 33"/></svg></span>
+        <div class="top"><span class="code">CERES</span><span class="id">DET. B</span></div>
+        <h4>Vision grain-size measurement</h4>
+        <p class="note">Production computer-vision — fine-tuned instance segmentation for automated grain sizing. Offline desktop app with an active-learning correction flywheel; now the objective measurement gate.</p>
+        <div class="pm"><span class="n">r = 0.<span data-count="97" data-pad="2">0</span></span><span class="l">vs gold-standard</span></div>
+      </article>
+      <article class="proj rev d2"><span class="edge"></span>
+        <span class="proj-mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5 40 14 40 32 24 41 8 32 8 14 Z"/><path d="M16 24 22 30 33 17"/></svg></span>
+        <div class="top"><span class="code">V3CTOR</span><span class="id">DET. C</span></div>
+        <h4>Reproducible analysis, enforced</h4>
+        <p class="note">An MCP server making auditable analysis the path of least resistance: enforced pre-registration, hash-chained lineage, deterministic outputs. The system that scales the work.</p>
+        <div class="pm"><span class="n" data-count="85">0</span><span class="l">tests green · 22 tools</span></div>
+      </article>
+      <article class="proj rev d3"><span class="edge"></span>
+        <span class="proj-mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 42 V25"/><path d="M16 42 H32"/><path d="M24 25 C24 18 16 18 13 14"/><path d="M24 30 C24 23 33 23 35 17"/><circle cx="12" cy="12" r="4"/><circle cx="36" cy="15" r="4"/><circle cx="24" cy="8" r="5"/></svg></span>
+        <div class="top"><span class="code">BIOME</span><span class="id">DET. D</span></div>
+        <h4>Production-intelligence platform</h4>
+        <p class="note">Analytical data cube + relationship graph + automated 10-pillar governance audit + SPC. Surfaced a major hidden cost variance invisible across siloed systems.</p>
+        <div class="pm"><span class="n" data-count="10">0</span><span class="l">pillar audit</span></div>
+      </article>
+      <article class="proj rev d1"><span class="edge"></span>
+        <span class="proj-mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6 C30 16 34 18 34 28 A10 10 0 0 1 14 28 C14 21 18 18 24 6 Z"/><path d="M20 33 V28"/><path d="M24 33 V23"/><path d="M28 33 V30"/></svg></span>
+        <div class="top"><span class="code">VULCANOPS</span><span class="id">DET. E</span></div>
+        <h4>ML scrap forecasting</h4>
+        <p class="note">~90 models across five defect types with SHAP-driven process-driver science and rigorous feature engineering — scrap moved from after-the-fact reporting to forward forecasting.</p>
+        <div class="pm"><span class="n" data-count="90">0</span><span class="l">models · 5 defects</span></div>
+      </article>
+      <article class="proj rev d2"><span class="edge"></span>
+        <span class="proj-mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M24 13 V24 32 28"/><path d="M24 7 V10M41 24 H38M24 41 V38M7 24 H10"/></svg></span>
+        <div class="top"><span class="code">KRONOS</span><span class="id">DET. F</span></div>
+        <h4>Agentic knowledge &amp; automation system</h4>
+        <p class="note">A personal "second brain" — an MCP server + desktop app that turns a knowledge vault into an agentic system: semantic search, schedulers, and multi-model orchestration the AI calls to run real workflows end to end.</p>
+        <div class="pm"><span class="n" data-count="99">0</span><span class="l">MCP tools · agent-callable</span></div>
+      </article>
+      <article class="proj rev d3"><span class="edge"></span>
+        <span class="proj-mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 42 V20 A15 15 0 0 1 39 20 V42"/><path d="M24 42 V11"/><path d="M6 42 H42"/><path d="M24 5 V9"/></svg></span>
+        <div class="top"><span class="code">MORIA</span><span class="id">DET. G</span></div>
+        <h4>Scrap-rate automation app</h4>
+        <p class="note">A standalone app that automates foundry scrap-rate roll-downs and SAP write-back from the unified data cube — replacing manual corrections with a governed, repeatable pipeline.</p>
+        <div class="pm"><span class="n">SAP</span><span class="l">automated scrap write-back</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PATH / SHEET 05 ===================== -->
+<section class="plate" id="path">
+  <div class="wrap">
+    <div class="plate-head rev">
+      <div class="sheet-tag"><b>SHEET 05</b> — Survey Stations</div>
+      <h2 class="plate-title">Toward the <span class="u">decision loop</span></h2>
+    </div>
+    <div class="timeline">
+      <div class="tl current rev d1"><span class="stn"><span class="edge"></span></span>
+        <div class="date">NOW · 2022 — PRESENT</div>
+        <div class="role">Production Engineer / Foundry Expert</div>
+        <div class="org">Georg Fischer JRG AG · Sissach, CH</div>
+        <p class="desc note">Realigned from foundry management to a deep-analysis / data expert track. Owns the manufacturing decision loop — the 5M+ CHF Closed-Loop Quality Intelligence program plus the production-intelligence stack (CERES, Vulcan, BIOME, V3CTOR). Plant-wide data management; 5S, Kanban (~30% lead-time gain), automated core-shop vision.</p>
+      </div>
+      <div class="tl rev d2"><span class="stn"><span class="edge"></span></span>
+        <div class="date">2019 — 2022</div>
+        <div class="role">Technical Director / Head of Foundry</div>
+        <div class="org">Metallgiesserei Wilhelm Funke GmbH · Alfeld (Leine), DE</div>
+        <p class="desc note">Led the transformation to AS9100 aerospace certification. Embedded simulation as a core design tool (+50% yield, −60% chills, sub-5-day prototypes); root-caused magnesium &amp; copper-alloy defects; design support to Rimac on next-gen electric engines.</p>
+      </div>
+      <div class="tl rev d3"><span class="stn"><span class="edge"></span></span>
+        <div class="date">2015 — 2019</div>
+        <div class="role">Senior Project Engineer / Simulation Specialist</div>
+        <div class="org">Nemak Wernigerode GmbH · DE</div>
+        <p class="desc note">Rescued an engine-block launch by root-causing hot tearing with process-parameter changes alone. Built a predictive material-property tool from 10,000+ tensile bars to secure SOP; created an SQL framework to leverage process data across the chain.</p>
+      </div>
+      <div class="tl rev d1"><span class="stn"><span class="edge"></span></span>
+        <div class="date">2011 — 2015</div>
+        <div class="role">Product Development Engineer / Lead Design Engineer</div>
+        <div class="org">Componenta · Helsinki, FI</div>
+        <p class="desc note">Supported a 300,000+ t/yr foundry network; led the most demanding large castings (10-tonne wind-turbine hubs, marine engine components for clients incl. Wärtsilä); cut scrap 50% via simulation + process-data analysis.</p>
+      </div>
+      <div class="tl rev d2"><span class="stn"><span class="edge"></span></span>
+        <div class="date">2005 — 2011</div>
+        <div class="role">MSc &amp; BSc — Metal Materials &amp; Manufacturing</div>
+        <div class="org">Tampere University of Technology · FI</div>
+        <p class="desc note">The metallurgy &amp; manufacturing foundation behind the data work. Lean Six Sigma Green Belt (2026); AS9100 implementation lead.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RUNNING / SHEET 06 ===================== -->
+<section class="plate" id="running">
+  <div class="wrap">
+    <div class="run-head">
+      <div class="rev">
+        <div class="sheet-tag"><b>SHEET 06</b> — Field Survey</div>
+        <h2 class="plate-title" style="margin-top:12px">Same method, <span class="u">on the trail</span></h2>
+      </div>
+      <p class="run-intro rev d1">Distance runner with a fastpacking habit — multi-day trail on a light pack. <strong>Structured training, measured progress, the long game.</strong> The discipline that ships production fixes finishes hard races.</p>
+    </div>
+
+    <div class="section-card rev d2"><span class="edge"></span>
+      <div class="lbl"><span>Route · elevation profile</span><span>Fastpacking — multi-day</span></div>
+      <svg id="route-svg" viewBox="0 0 1000 210" preserveAspectRatio="none" aria-label="Hand-drawn running elevation profile"></svg>
+    </div>
+
+    <div class="run-stats rev d3">
+      <div class="run-stat"><span class="edge"></span><div class="n ph">0:00</div><div class="l">Marathon PR</div></div>
+      <div class="run-stat"><span class="edge"></span><div class="n ph">0:00</div><div class="l">Half PR</div></div>
+      <div class="run-stat"><span class="edge"></span><div class="n ph">00:00</div><div class="l">10K PR</div></div>
+      <div class="run-stat"><span class="edge"></span><div class="n ph">00</div><div class="l">Weekly km</div></div>
+    </div>
+
+    <div class="run-disc">
+      <div class="disc rev d2"><span class="edge"></span>
+        <h4>Structured, not heroic</h4>
+        <p class="note">Periodized training, honest data, controlled progression. No single big push — a system that compounds, the same way scrap comes down.</p>
+      </div>
+      <div class="disc rev d3"><span class="edge"></span>
+        <h4>Built for the long route</h4>
+        <p class="note">Fastpacking rewards judgment under fatigue and light, deliberate kit. Multi-day problems solved by preparation, not improvisation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT / TITLE BLOCK ===================== -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-inner rev"><span class="edge"></span>
+      <div class="sheet-tag"><b>SHEET 07</b> — Contact</div>
+      <h2 style="margin-top:14px">Let's close <span class="u">your loop</span></h2>
+      <p class="contact-sub note">Open to senior data-science roles and consulting where metallurgy, quality and data science meet. If you have scrap, cost or process problems that resist the usual dashboards — let's talk.</p>
+      <div class="contact-actions">
+        <a href="mailto:toni.siik@gmail.com" class="btn solid">Email me <span class="arr">→</span></a>
+        <a href="https://www.linkedin.com/in/tonisiik" target="_blank" rel="noopener" class="btn">LinkedIn<span class="edge"></span></a>
+      </div>
+
+      <div class="titleblock">
+        <div class="tb-cell big tb-span2"><span class="edge"></span><div class="k">Drawn by</div><div class="v">Toni Siik</div></div>
+        <div class="tb-cell"><span class="edge"></span><div class="k">Sheet</div><div class="v">07 of 07</div></div>
+        <div class="tb-cell tb-span2"><span class="edge"></span><div class="k">Title</div><div class="v">Manufacturing Data Scientist — Quality &amp; Process Intelligence</div></div>
+        <div class="tb-cell"><span class="edge"></span><div class="k">Rev</div><div class="v">— / <span id="rev-year"></span></div></div>
+        <div class="tb-cell"><span class="edge"></span><div class="k">Email</div><a class="v" href="mailto:toni.siik@gmail.com">toni.siik@gmail.com</a></div>
+        <div class="tb-cell"><span class="edge"></span><div class="k">Web</div><a class="v" href="https://www.linkedin.com/in/tonisiik" target="_blank" rel="noopener">/in/tonisiik</a></div>
+        <div class="tb-cell"><span class="edge"></span><div class="k">Scale</div><div class="v">1 : 1</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>© <span id="year"></span> Toni Siik · Manufacturing Data Science</span>
+  <span><a href="#top">Return to Sheet 01 ↑</a></span>
+</footer>
+
+<div class="stamp">DWG. <b>TS-2026</b> · NTS · <span id="stamp-year"></span></div>
+
+<script is:inline src="/blueprint.js"></script>
+</body>
+</html>
