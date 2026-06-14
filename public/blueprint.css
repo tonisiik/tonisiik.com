@@ -185,10 +185,11 @@ section { position: relative; z-index: 2; }
   font-family: var(--f-hand); font-size: 14px; cursor: pointer;
   padding: 5px; user-select: none;
 }
-.toggle .opt { padding: 5px 12px; color: var(--ink-faint); letter-spacing: .05em; text-transform: uppercase; transition: color .25s; z-index: 1; }
+.toggle .opt { padding: 6px 6px; min-width: 96px; text-align: center; box-sizing: border-box; color: var(--ink-faint); letter-spacing: .05em; text-transform: uppercase; transition: color .25s; z-index: 1; }
 .toggle .opt.on { color: var(--accent); }
 .toggle .knob {
-  position: absolute; top: 5px; bottom: 5px; width: calc(50% - 5px);
+  position: absolute; top: 5px; bottom: 5px; left: 5px; width: calc(50% - 5px);
+  box-sizing: border-box;
   border: 1.6px solid var(--accent); filter: url(#pencil); border-radius: 3px;
   transition: transform .3s var(--ease); z-index: 0;
 }
