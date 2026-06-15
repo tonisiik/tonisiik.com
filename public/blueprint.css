@@ -503,3 +503,21 @@ section { position: relative; z-index: 2; }
 
 /* About intro = full column width (match the stat boxes underneath) */
 .about-lede { max-width: none; }
+
+/* ============================================================
+   Sections as framed cards (match Contact) + one-line headers
+   ============================================================ */
+.plate { padding: clamp(26px, 3.5vw, 50px) 0; }   /* spacing between framed cards */
+.plate > .wrap {
+  position: relative;
+  padding: clamp(34px, 4.5vw, 62px) calc(var(--pad) + clamp(20px, 3vw, 44px));
+}
+.plate > .wrap::before {        /* hand-drawn card border, same as .edge */
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  top: 0; bottom: 0; left: var(--pad); right: var(--pad);
+  border: 1.8px solid var(--edge); filter: url(#pencil); border-radius: 3px;
+}
+.plate > .wrap > * { position: relative; z-index: 1; }
+
+/* section headers on one line: sheet-tag + title inline (like Running) */
+.plate-head { display: flex; align-items: baseline; gap: clamp(14px, 2.5vw, 30px); flex-wrap: wrap; max-width: none; }
