@@ -521,3 +521,16 @@ section { position: relative; z-index: 2; }
 
 /* section headers on one line: sheet-tag + title inline (like Running) */
 .plate-head { display: flex; align-items: baseline; gap: clamp(14px, 2.5vw, 30px); flex-wrap: wrap; max-width: none; }
+
+/* ============================================================
+   Opaque "index card" backgrounds — cards float over the fixed grid
+   ============================================================ */
+:root, :root[data-mode="blueprint"] { --card: #16466e; }   /* a touch lighter than --paper */
+:root[data-mode="ink"]              { --card: #fbf8f1; }   /* near-white index card on cream */
+
+.plate > .wrap::before,
+.contact-inner {
+  background: var(--card);
+  box-shadow: 0 16px 42px -20px rgba(0,0,0,.5);
+}
+.contact-inner { border-radius: 3px; }
