@@ -534,3 +534,12 @@ section { position: relative; z-index: 2; }
   box-shadow: 0 16px 42px -20px rgba(0,0,0,.5);
 }
 .contact-inner { border-radius: 3px; }
+
+/* CV sub-page: give framed cards the same opaque index-card fill as the home sections */
+.sheet-page .cv-head,
+.sheet-page .statbox,
+.sheet-page .bom-col {
+  background: var(--card);
+  box-shadow: 0 16px 42px -20px rgba(0,0,0,.5);
+  border-radius: 3px;
+}
