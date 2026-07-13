@@ -282,3 +282,178 @@
   })();
 
 })();
+
+/* ============================================================
+   ANIMATED DRAFT-SHEET BACKGROUND — parallax construction marks
+   A fixed canvas of faint hand-drawn technical marks (targets,
+   construction circles, arcs, rosettes, corner ticks) that drift
+   at varying parallax depths as you scroll, plus a subtle parallax
+   on the CSS graph grid. Theme-aware (re-reads vars on mode flip),
+   perf-light (rAF-coalesced), and static under reduced-motion.
+   ============================================================ */
+(function draftBackground() {
+  'use strict';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+
+  const cv = document.createElement('canvas');
+  cv.id = 'draft-bg';
+  cv.setAttribute('aria-hidden', 'true');
+  document.body.insertBefore(cv, document.body.firstChild);
+  const ctx = cv.getContext('2d');
+  if (!ctx) return;
+
+  let W = 0, H = 0, dpr = 1, fieldH = 0;
+  let marks = [];
+  const col = { faint: '#6f93b6', accent: '#f2b35e' };
+
+  function readColors() {
+    const cs = getComputedStyle(root);
+    const f = cs.getPropertyValue('--ink-faint').trim();
+    const a = cs.getPropertyValue('--accent').trim();
+    if (f) col.faint = f;
+    if (a) col.accent = a;
+  }
+
+  // seeded RNG → stable mark layout across resizes / redraws
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  const TYPES = ['target', 'circle', 'arc', 'rosette', 'corner'];
+
+  function build() {
+    const rnd = mulberry32(20260713);
+    const n = Math.min(40, Math.max(12, Math.round((W * fieldH) / 105000)));
+    marks = [];
+    for (let i = 0; i < n; i++) {
+      marks.push({
+        x: rnd() * W,
+        baseY: rnd() * fieldH,
+        depth: 0.10 + rnd() * 0.44,       // parallax strength (near/far)
+        size: 16 + rnd() * 42,
+        rot: rnd() * Math.PI,
+        alpha: 0.09 + rnd() * 0.12,
+        accent: rnd() < 0.12,             // occasional accent-colored mark
+        type: TYPES[(rnd() * TYPES.length) | 0]
+      });
+    }
+  }
+
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    fieldH = H * 1.7 + 220;               // virtual band that recycles infinitely
+    cv.width = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    cv.style.width = W + 'px';
+    cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    readColors();
+    build();
+    draw();
+  }
+
+  /* ---- hand-drawn mark primitives (thin strokes, drawn at origin) ---- */
+  function markTarget(r) {                // ⊕ registration target
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.stroke();
+    const t = r * 1.5;
+    ctx.beginPath();
+    ctx.moveTo(-t, 0); ctx.lineTo(t, 0);
+    ctx.moveTo(0, -t); ctx.lineTo(0, t);
+    ctx.stroke();
+  }
+  function markCircle(r) {                // ⌀ dashed construction circle
+    ctx.setLineDash([2, 6]);
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(0, 0, 1.4, 0, Math.PI * 2);
+    ctx.fillStyle = ctx.strokeStyle; ctx.fill();
+  }
+  function markArc(r) {                   // radius sweep with an arrow tick
+    const a0 = -0.25, a1 = Math.PI * 0.85;
+    ctx.beginPath(); ctx.arc(0, 0, r, a0, a1); ctx.stroke();
+    const ex = Math.cos(a1) * r, ey = Math.sin(a1) * r;
+    const tang = a1 + Math.PI / 2, k = 6;
+    ctx.beginPath();
+    ctx.moveTo(ex - k * Math.cos(tang - 0.5), ey - k * Math.sin(tang - 0.5));
+    ctx.lineTo(ex, ey);
+    ctx.lineTo(ex - k * Math.cos(tang + 0.5), ey - k * Math.sin(tang + 0.5));
+    ctx.stroke();
+  }
+  function markRosette(r) {               // protractor-style tick ring
+    for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a) * r * 0.72, Math.sin(a) * r * 0.72);
+      ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+      ctx.stroke();
+    }
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.stroke();
+  }
+  function markCorner(r) {                // corner reg-mark + short dimension line
+    ctx.beginPath();
+    ctx.moveTo(-r, -r + r * 0.55); ctx.lineTo(-r, -r); ctx.lineTo(-r + r * 0.55, -r);
+    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-r, r); ctx.lineTo(r, r); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-r, r - 3); ctx.lineTo(-r, r + 3);
+    ctx.moveTo(r, r - 3); ctx.lineTo(r, r + 3);
+    ctx.stroke();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const sy = window.scrollY || window.pageYOffset || 0;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    for (const m of marks) {
+      let y = (m.baseY - sy * m.depth) % fieldH;
+      if (y < 0) y += fieldH;
+      y -= 110;                           // margin so marks recycle off-screen
+      if (y < -90 || y > H + 90) continue;
+      const r = m.size * 0.5;
+      ctx.save();
+      ctx.translate(m.x, y);
+      ctx.rotate(m.rot);
+      ctx.globalAlpha = m.alpha;
+      ctx.strokeStyle = m.accent ? col.accent : col.faint;
+      ctx.lineWidth = 1;
+      switch (m.type) {
+        case 'target': markTarget(r); break;
+        case 'circle': markCircle(r); break;
+        case 'arc': markArc(r); break;
+        case 'rosette': markRosette(r); break;
+        case 'corner': markCorner(r); break;
+      }
+      ctx.restore();
+    }
+  }
+
+  /* ---- CSS graph-grid parallax (minor drifts faster than major) ---- */
+  function gridShift() {
+    const sy = window.scrollY || window.pageYOffset || 0;
+    root.style.setProperty('--gsy-min', (-sy * 0.12) + 'px');
+    root.style.setProperty('--gsy-maj', (-sy * 0.05) + 'px');
+  }
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { gridShift(); draw(); ticking = false; });
+  }
+
+  resize();
+  gridShift();
+  if (!reduce) window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', resize);
+  // theme toggle → re-read colors + repaint
+  new MutationObserver(() => { readColors(); draw(); })
+    .observe(root, { attributes: true, attributeFilter: ['data-mode'] });
+})();
