@@ -89,11 +89,17 @@
     </div>
 
     <div class="fig rev d2">
+      <canvas id="hero3d" aria-hidden="true"></canvas>
       <svg id="loop-svg" viewBox="0 0 400 400" aria-label="Figure 1 — the decision loop"></svg>
       <div class="fig-cap"><b>FIG. 1</b> — The Decision Loop</div>
     </div>
   </div>
 </section>
+
+<script>
+  import { initHero3D } from '../scripts/hero3d.js';
+  initHero3D();
+</script>
 
 <!-- ===================== ABOUT / SHEET 02 ===================== -->
 <section class="plate about" id="about">

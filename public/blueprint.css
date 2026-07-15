@@ -222,6 +222,9 @@ section { position: relative; z-index: 2; }
 /* loop figure */
 .fig { position: relative; display: flex; flex-direction: column; align-items: center; }
 #loop-svg { width: 100%; max-width: 430px; height: auto; overflow: visible; }
+/* WebGL hero object — same footprint as the fallback SVG */
+#hero3d { width: 100%; max-width: 430px; aspect-ratio: 1 / 1; display: block; touch-action: pan-y; }
+@media (max-width: 900px) { #hero3d { max-width: 340px; } }
 .fig-cap { font-family: var(--f-hand); font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 10px; }
 .fig-cap b { color: var(--accent); }
 
