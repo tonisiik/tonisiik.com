@@ -199,7 +199,20 @@ section { position: relative; z-index: 2; }
    HERO / SHEET 01
    ============================================================ */
 .hero { min-height: 100svh; display: flex; align-items: center; padding: 110px 0 70px; }
-.hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(30px,5vw,70px); align-items: center; width: 100%; }
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 1fr 0.92fr;
+  grid-template-areas: "intro fig" "cta cta";
+  gap: clamp(22px,3vw,44px) clamp(30px,5vw,70px);
+  align-items: center;
+  width: 100%;
+}
+.hero-intro { grid-area: intro; }
+.hero .fig { grid-area: fig; }
+.hero-cta { grid-area: cta; }   /* formula + actions, full width below the model */
+/* sit the model a bit higher next to the name (desktop only; margin, not
+   transform, so the .rev reveal animation doesn't reset it) */
+@media (min-width: 901px) { .hero .fig { margin-top: -44px; } }
 
 .hero-name { font-family: var(--f-display); font-weight: 700; font-size: clamp(52px, 11vw, 134px); line-height: 0.86; letter-spacing: .01em; text-transform: uppercase; }
 .hero-name span { display: block; }
@@ -222,15 +235,15 @@ section { position: relative; z-index: 2; }
 /* loop figure */
 .fig { position: relative; display: flex; flex-direction: column; align-items: center; }
 #loop-svg { width: 100%; max-width: 430px; height: auto; overflow: visible; }
-/* WebGL hero object — same footprint as the fallback SVG */
-#hero3d { width: 100%; max-width: 430px; aspect-ratio: 1 / 1; display: block; touch-action: pan-y; }
-@media (max-width: 900px) { #hero3d { max-width: 340px; } }
+/* WebGL hero object — the root-cause tree (a bit larger than the fallback SVG) */
+#causal-tree { width: 100%; max-width: 520px; height: clamp(380px, 50vh, 540px); display: block; margin: 0 auto; touch-action: pan-y; }
+@media (max-width: 900px) { #causal-tree { max-width: 420px; height: clamp(320px, 44vh, 460px); } }
 .fig-cap { font-family: var(--f-hand); font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 10px; }
 .fig-cap b { color: var(--accent); }
 
 @media (max-width: 900px) {
-  .hero .wrap { grid-template-columns: 1fr; }
-  .fig { order: -1; max-width: 340px; margin: 0 auto; }
+  .hero .wrap { grid-template-columns: 1fr; grid-template-areas: "intro" "fig" "cta"; }
+  .fig { max-width: 360px; margin: 0 auto; }
 }
 
 /* ============================================================

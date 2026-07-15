@@ -58,7 +58,7 @@
 <!-- ===================== HERO / SHEET 01 ===================== -->
 <section class="hero" id="top">
   <div class="wrap">
-    <div>
+    <div class="hero-intro">
       <div class="sheet-tag rev"><b>SHEET 01</b> — General Arrangement</div>
       <h1 class="hero-name">
         <span class="rev d1">TONI</span>
@@ -71,7 +71,15 @@
       </div>
 
       <p class="hero-lede rev d3">I own the manufacturing decision loop — <strong>detect, measure, explain, intervene, standardize</strong> — turning fragmented plant, lab, supplier and ERP data into causal root causes and measured shop-floor change.</p>
+    </div>
 
+    <div class="fig rev d2">
+      <canvas id="causal-tree" aria-hidden="true"></canvas>
+      <svg id="loop-svg" viewBox="0 0 400 400" aria-label="Figure 1 — the decision loop"></svg>
+      <div class="fig-cap"><b>FIG. 1</b> — Root-Cause Tree</div>
+    </div>
+
+    <div class="hero-cta">
       <div class="formula rev d4">
         <span class="term">Foundry metallurgy<span class="edge"></span></span>
         <span class="op">+</span>
@@ -87,18 +95,12 @@
         <a href="#contact" class="btn">Get in touch<span class="edge"></span></a>
       </div>
     </div>
-
-    <div class="fig rev d2">
-      <canvas id="hero3d" aria-hidden="true"></canvas>
-      <svg id="loop-svg" viewBox="0 0 400 400" aria-label="Figure 1 — the decision loop"></svg>
-      <div class="fig-cap"><b>FIG. 1</b> — The Decision Loop</div>
-    </div>
   </div>
 </section>
 
 <script>
-  import { initHero3D } from '../scripts/hero3d.js';
-  initHero3D();
+  import { initCausalTree } from '../scripts/causaltree.js';
+  initCausalTree();
 </script>
 
 <!-- ===================== ABOUT / SHEET 02 ===================== -->
