@@ -4,7 +4,7 @@
 // Professional content (Survey Stations / Path) completed from POLARIS Master Resume.
 ---
 <!DOCTYPE html>
-<html lang="en" data-mode="ink">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,26 +17,6 @@
 </head>
 <body>
 
-<!-- pencil filter: minute line drift + pencil-pressure opacity variance -->
-<svg class="svg-defs" aria-hidden="true">
-  <filter id="pencil" x="-8%" y="-8%" width="116%" height="116%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="2" seed="7" result="warp"/>
-    <feDisplacementMap in="SourceGraphic" in2="warp" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="disp"/>
-    <feTurbulence type="fractalNoise" baseFrequency="0.055 0.07" numOctaves="2" seed="11" result="grain"/>
-    <feColorMatrix in="grain" type="matrix"
-      values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.42 0.6" result="mask"/>
-    <feComposite in="disp" in2="mask" operator="in"/>
-  </filter>
-  <filter id="pencil-fine" x="-8%" y="-8%" width="116%" height="116%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="3" result="warp"/>
-    <feDisplacementMap in="SourceGraphic" in2="warp" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="disp"/>
-    <feTurbulence type="fractalNoise" baseFrequency="0.07 0.09" numOctaves="2" seed="5" result="grain"/>
-    <feColorMatrix in="grain" type="matrix"
-      values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0.55" result="mask"/>
-    <feComposite in="disp" in2="mask" operator="in"/>
-  </filter>
-</svg>
-
 <!-- ===================== TOP BAR ===================== -->
 <header class="topbar" id="topbar">
   <a class="id" href="#top">T. SIIK</a>
@@ -48,11 +28,6 @@
     <a href="#contact">07·Contact</a>
     <a href="/cv">08·CV</a>
   </nav>
-  <div class="toggle" id="modeToggle" data-on="ink" role="button" tabindex="0" aria-label="Toggle drawing mode">
-    <span class="knob"></span>
-    <span class="opt" data-mode="blueprint">Blueprint</span>
-    <span class="opt on" data-mode="ink">Ink</span>
-  </div>
 </header>
 
 <!-- ===================== HERO / SHEET 01 ===================== -->
@@ -74,9 +49,8 @@
     </div>
 
     <div class="fig rev d2">
-      <canvas id="causal-tree" aria-hidden="true"></canvas>
-      <svg id="loop-svg" viewBox="0 0 400 400" aria-label="Figure 1 — the decision loop"></svg>
-      <div class="fig-cap"><b>FIG. 1</b> — Root-Cause Tree</div>
+      <canvas id="spc-chart" aria-label="Figure 1 — process control chart"></canvas>
+      <div class="fig-cap"><span><b>FIG. 1</b> — Process control chart</span><span>UCL / CL / LCL</span></div>
     </div>
 
     <div class="hero-cta">
@@ -99,8 +73,8 @@
 </section>
 
 <script>
-  import { initCausalTree } from '../scripts/causaltree.js';
-  initCausalTree();
+  import { initSpcChart } from '../scripts/spcchart.js';
+  initSpcChart();
 </script>
 
 <!-- ===================== ABOUT / SHEET 02 ===================== -->
