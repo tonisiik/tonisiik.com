@@ -109,7 +109,10 @@ section { position: relative; z-index: 2; }
   transition: transform .25s var(--ease), color .25s;
 }
 .btn .edge { border-width: 1px; }
-.btn:hover { transform: translate(-1px,-2px); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translate(-1px,-2px); color: var(--accent); }
+}
+.btn:active { transform: translate(-1px,-1px) scale(0.98); transition: transform 120ms ease-out; }
 .btn.solid { color: var(--paper); }
 .btn.solid::before { content: ""; position: absolute; inset: 0; background: var(--accent); z-index: -1; }
 .btn .arr { transition: transform .25s var(--ease); }
@@ -229,8 +232,13 @@ section { position: relative; z-index: 2; }
 @media (max-width: 520px) { .bom-grid { grid-template-columns: 1fr; } }
 
 /* WORK / SHEET 04 — case-study cards */
-.feat { position: relative; margin-bottom: 16px; }
-.feat .edge { border-left: 3px solid var(--accent); }
+.feat { position: relative; margin-bottom: 16px; transition: transform 160ms var(--ease); }
+.feat .edge { border-left: 3px solid var(--accent); transition: border-color 160ms var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .feat:hover { transform: translateY(-2px); }
+  .feat:hover .edge { border-color: var(--accent); border-left-color: var(--accent); }
+}
+.feat:active { transform: translateY(0) scale(0.99); transition: transform 100ms ease-out; }
 .feat-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; }
 .feat-l { padding: clamp(24px,3.5vw,36px); }
 .feat-r { position: relative; padding: clamp(24px,3.5vw,36px); display: flex; flex-direction: column; justify-content: center; gap: 20px; }
@@ -248,7 +256,13 @@ section { position: relative; z-index: 2; }
 .metric .l { font-family: var(--f-hand); font-size: 12.5px; color: var(--ink-soft); margin-top: 6px; }
 
 .proj-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-.proj { position: relative; padding: 22px 20px; display: flex; flex-direction: column; min-height: 220px; }
+.proj { position: relative; padding: 22px 20px; display: flex; flex-direction: column; min-height: 220px; transition: transform 160ms var(--ease); }
+.proj .edge { transition: border-color 160ms var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .proj:hover { transform: translateY(-2px); }
+  .proj:hover .edge { border-color: var(--accent); }
+}
+.proj:active { transform: translateY(0) scale(0.99); transition: transform 100ms ease-out; }
 .proj .top { display: flex; justify-content: space-between; align-items: baseline; }
 .proj .code { font-family: var(--f-typed); font-size: 11px; letter-spacing: .05em; color: var(--accent); }
 .proj .id { font-family: var(--f-typed); font-size: 11px; color: var(--ink-faint); }
