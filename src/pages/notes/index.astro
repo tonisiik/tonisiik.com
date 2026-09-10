@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Sheet from '../../layouts/Sheet.astro';
+
+const notes = await getCollection('notes');
+---
+<Sheet title="Field Notes — Toni Siik" description="Short write-ups on manufacturing data science, quality systems, and process discipline by Toni Siik.">
+  <section class="sheet-page"><div class="wrap">
+    <a class="backlink top" href="/#notes">← Return to Sheet 01</a>
+    <div class="plate-head">
+      <div class="sheet-tag"><b>INDEX</b> — Field Notes</div>
+      <h2 class="plate-title">Short <span class="u">write-ups</span></h2>
+    </div>
+    <div class="proj-grid">
+      {notes.map((n, i) => (
+        <a class="proj" href={`/notes/${n.id}`}><span class="edge"></span>
+          <div class="top"><span class="code">{n.data.category ?? 'Field note'}</span><span class="id">{String(i + 1).padStart(2, '0')}</span></div>
+          <h4>{n.data.title}</h4>
+          <p class="note">{n.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </div></section>
+</Sheet>
