@@ -1,7 +1,8 @@
 ---
 // Standalone hand-drawn "Drawing Set" portfolio (Claude Design — Blueprint variant).
-// Self-contained: loads /blueprint.css and /blueprint.js from public/. Blueprint/Ink toggle.
+// Self-contained: loads /blueprint.css and /blueprint.js from public/.
 // Professional content (Survey Stations / Path) completed from POLARIS Master Resume.
+import { ClientRouter } from 'astro:transitions';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +15,13 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/blueprint.css">
+<ClientRouter />
 </head>
 <body>
 
 <!-- ===================== TOP BAR ===================== -->
 <header class="topbar" id="topbar">
-  <a class="id" href="#top">T. SIIK</a>
+  <a class="id" href="#top" transition:name="site-logo">T. SIIK</a>
   <nav class="idx">
     <a href="#about">02·About</a>
     <a href="#work">04·Work</a>
@@ -74,6 +76,7 @@
 <script>
   import { initSpcChart } from '../scripts/spcchart.js';
   initSpcChart();
+  document.addEventListener('astro:page-load', initSpcChart);
 </script>
 
 <!-- ===================== ABOUT / SHEET 02 ===================== -->

@@ -12,6 +12,7 @@ const { Content } = await render(project);
 ---
 <Sheet title={`${project.data.title} — Toni Siik`} description={project.data.description}>
   <section class="sheet-page"><div class="wrap">
+    <a class="backlink top" href="/#work">← Back to the drawing set</a>
     <div class="doc-head">
       <div class="sheet-tag"><b>DETAIL</b> — {project.data.category ?? 'Case study'}</div>
       {project.data.description && (

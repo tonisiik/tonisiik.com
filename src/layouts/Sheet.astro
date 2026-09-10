@@ -2,6 +2,7 @@
 // Reusable blueprint "sheet" chrome for sub-pages (CV, project details, index).
 // Mirrors the home page's drawing-set styling: topbar + footer + stamp,
 // loads /blueprint.css and /blueprint.js (route builder no-ops when absent).
+import { ClientRouter } from 'astro:transitions';
 interface Props { title?: string; description?: string; }
 const {
   title = 'Toni Siik — Manufacturing Data Scientist',
@@ -19,11 +20,12 @@ const {
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/blueprint.css">
+<ClientRouter />
 </head>
 <body>
 
 <header class="topbar" id="topbar">
-  <a class="id" href="/">T. SIIK</a>
+  <a class="id" href="/" transition:name="site-logo">T. SIIK</a>
   <nav class="idx">
     <a href="/#about">02·About</a>
     <a href="/#work">04·Work</a>

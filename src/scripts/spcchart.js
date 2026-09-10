@@ -101,6 +101,5 @@ export function initSpcChart() {
   }
 
   window.addEventListener('resize', () => draw(1));
-  window.addEventListener('load', begin);
-  if (document.readyState === 'complete') begin();
+  begin();
 }

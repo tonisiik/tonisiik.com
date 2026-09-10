@@ -397,6 +397,7 @@ section { position: relative; z-index: 2; }
 .doc-tags .mini .edge { border-width: 1px; }
 .backlink { display: inline-flex; gap: 8px; font-family: var(--f-hand); font-size: 14px; color: var(--ink-soft); margin-top: 36px; }
 .backlink:hover { color: var(--accent); }
+.backlink.top { margin-top: 0; margin-bottom: 28px; }
 
 /* CV sheet */
 .cv-head { position: relative; padding: 24px 26px; margin-bottom: 8px; }
