@@ -1,11 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <rect class="ink" x="12" y="12" width="76" height="76" fill="none" stroke="#20242A" stroke-width="5"/>
-    <path class="accent" d="M12,12 L12,30 M12,12 L30,12" fill="none" stroke="#2F6690" stroke-width="7" stroke-linecap="square"/>
-    <text class="ink" x="50" y="52" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="52" fill="#20242A">TS</text>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            .ink { fill: #E8EAED; stroke: #E8EAED; }
-            .accent { stroke: #74B7E0; }
-        }
-    </style>
+    <rect x="12" y="12" width="76" height="76" fill="#FFFFFF" stroke="#20242A" stroke-width="5"/>
+    <path d="M12,12 L12,30 M12,12 L30,12" fill="none" stroke="#2F6690" stroke-width="7" stroke-linecap="square"/>
+    <text x="50" y="52" text-anchor="middle" dominant-baseline="central" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="52" fill="#20242A">TS</text>
 </svg>
